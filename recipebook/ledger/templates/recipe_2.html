@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Recipe Book</title>
+    </head>
+    <body>
+        <ul>
+            <h3>Recipe 2</h3>
+            {% for ingredients in ingredients %}
+                <li>{{ ingredients }}</li>
+            {% endfor %}
+            <a href="http://127.0.0.1:8000/ledger/recipes/list">Back to List</a>
+        </ul>
+    </body>
+</html>
