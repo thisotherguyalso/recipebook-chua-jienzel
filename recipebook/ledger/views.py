@@ -1,136 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Ingredients, Recipe, RecipeIngredient
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 # Create your views here.
 
-def recipe_list(request):
-    context = {
-    "recipes": [
-        {
-            "name": "Recipe 1",
-            "ingredients": [
-                {
-                    "name": "tomato",
-                    "quantity": "3pcs"
-                },
-                {
-                    "name": "onion",
-                    "quantity": "1pc"
-                },
-                {
-                    "name": "pork",
-                    "quantity": "1kg"
-                },
-                {
-                    "name": "water",
-                    "quantity": "1L"
-                },
-                {
-                    "name": "sinigang mix",
-                    "quantity": "1 packet"
-                }
-            ],
-            "link": "/recipe/1"
-        },
-        {
-            "name": "Recipe 2",
-            "ingredients": [
-                {
-                    "name": "garlic",
-                    "quantity": "1 head"
-                },
-                {
-                    "name": "onion",
-                    "quantity": "1pc"
-                },
-                {
-                    "name": "vinegar",
-                    "quantity": "1/2cup"
-                },
-                {
-                    "name": "water",
-                    "quanity": "1 cup"
-                },
-                {
-                    "name": "salt",
-                    "quantity": "1 tablespoon"
-                },
-                {
-                    "name": "whole black peppers",
-                    "quantity": "1 tablespoon"
-                },
-                {
-                    "name": "pork",
-                    "quantity": "1 kilo"
-                }
-            ],
-            "link": "/recipe/2"
-        }
-    ]
-}
-    return render(request, 'recipe_list.html', context)
+class IngredientListView(ListView):
+    model = Ingredients
+    template_name = 'ingredient_list.html'
 
-def recipe_1(request):
-    context = {
-    "name": "Recipe 1",
-    "ingredients": [
-        {
-            "name": "tomato",
-            "quantity": "3pcs"
-        },
-        {
-            "name": "onion",
-            "quantity": "1pc"
-        },
-        {
-            "name": "pork",
-            "quantity": "1kg"
-        },
-        {
-            "name": "water",
-            "quantity": "1L"
-        },
-        {
-            "name": "sinigang mix",
-            "quantity": "1 packet"
-        }
-    ],
-    "link": "/recipe/1"
-}
-    return render(request, 'recipe_1.html', context)
+class IngredientDetailView(DetailView):
+    model = Ingredients
+    template_name = 'ingredient_detail.html'
 
-def recipe_2(request):
-    context = {
-    "name": "Recipe 2",
-    "ingredients": [
-        {
-            "name": "garlic",
-            "quantity": "1 head"
-        },
-        {
-            "name": "onion",
-            "quantity": "1pc"
-        },
-        {
-            "name": "vinegar",
-            "quantity": "1/2cup"
-        },
-        {
-            "name": "water",
-            "quantity": "1 cup"
-        },
-        {
-            "name": "salt",
-            "quantity": "1 tablespoon"
-        },
-        {
-            "name": "whole black peppers",
-            "quantity": "1 tablespoon"
-        },
-        {
-            "name": "pork",
-            "quantity": "1 kilo"
-        }
-    ],
-    "link": "/recipe/2"
-}
-    return render(request, 'recipe_2.html', context)
+    
+def ingredients_list(request):
+    ingredients = Ingredients.objects.all()
+    ctx = {
+        'ingredients' : ingredients
+    }
+    return render(request, 'ingredient_list.html', ctx)
+
+def ingredients_detail(request, id):
+    ctx = {
+        'ingredient' : Ingredients.objects.get(id=id) 
+    }
+    return render(request, 'ingredients_detail.html', ctx)
