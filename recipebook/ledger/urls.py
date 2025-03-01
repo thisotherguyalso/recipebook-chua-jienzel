@@ -1,3 +1,4 @@
+"""Urls file."""
 from django.urls import path
 
 from .views import RecipeListView, RecipeDetailView

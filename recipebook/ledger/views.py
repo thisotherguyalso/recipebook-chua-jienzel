@@ -1,14 +1,19 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Ingredient, Recipe, RecipeIngredient
+"""Views file."""
+from .models import Recipe
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 # Create your views here.
 
+
 class RecipeListView(ListView):
+    """List view of recipe."""
+
     model = Recipe
     template_name = 'recipe_list.html'
 
+
 class RecipeDetailView(DetailView):
+    """Detail view of recipe."""
+
     model = Recipe
     template_name = 'recipe_detail.html'
