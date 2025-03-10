@@ -23,6 +23,9 @@ class Recipe(models.Model):
     """Ingredient object."""
 
     name = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    createdOn = models.DateTimeField()
+    updatedOn = models.DateTimeField()
 
     def __str__(self):
         """Return name."""
